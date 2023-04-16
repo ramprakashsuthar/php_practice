@@ -128,7 +128,7 @@ button{
     <form name="myform" id="login" action="userdb.php" method="post">
         <h3>Login</h3>
 
-        <label for="username">Username1</label>
+        <label for="username">Username</label>
         <input type="text" placeholder="Email" id="username" name="email">
 
         <label for="password">Password</label>
