@@ -62,7 +62,7 @@
     if(isset($_POST['updateuser']))
     {
 
-    echo 'signup details';
+    //echo 'signup details';
         // Fetch input values
         $fname=$_POST['fname'];
         //echo $fname;
@@ -75,6 +75,7 @@
         $mobile=$_POST['mobile'];
         //echo $mobile;
         $email=$_POST['email'];
+        $id=$_POST['id'];
         //echo $email;
         
         // echo '<pre>';
@@ -86,14 +87,31 @@
         }
         // Insert query 
         //$insert_query = "INSERT INTO users(fname, lname, gender, dob,email, mobile, password) VALUES('$fname','$lname','$gender','$dob','$email','$mobile','$password')";
-        $insert_query = "UPDATE users set fname= '$fname',lname='$lname' ";
+        $insert_query = "UPDATE users set fname= '$fname',lname='$lname', gender='$gender', dob='$dob', email='$email', mobile='$mobile' WHERE id = $id";
         if ($conn->query($insert_query) === TRUE) {
-            echo "<p style='text-align:center;font-size:20px;margin-top:60px;'>You have been registered successfully, <a href='login.php'>click here</a> to login.</p>";
+            echo "<p style='text-align:center;font-size:20px;margin-top:60px;'>Your data have been updated successfully, <a href='users-list.php'>click here</a> to go user list//.</p>";
             //header('Location: login.php?i=true');
             exit();
         }else {
             echo "Error: " . $insert_query . "<br>" . $conn->error;
         }
         $conn->close();
+    }
+
+    // for delete
+    if($_GET['action']=='delete' && isset($_GET['id'])){
+        $id = $_GET['id'];
+
+        $delete_query = "delete from users where id=$id";
+        if ($conn->query($delete_query) === TRUE) {
+            //echo "<p style='text-align:center;font-size:20px;margin-top:60px;'>Your data have been deleted successfully, <a href='users-list.php'>click here</a> to go user list</p>";
+            //header('Location: login.php?i=true');
+            echo 'User deleted successfully.';
+            exit();
+        }else {
+            echo "Error: " . $insert_query . "<br>" . $conn->error;
+        }
+        $conn->close();
+
     }
 ?>

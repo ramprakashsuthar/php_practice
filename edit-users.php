@@ -100,41 +100,43 @@
   $user_query = "SELECT * FROM users WHERE id = $userid";
   $result = $conn->query($user_query);
   $row = $result->fetch_assoc();
-  echo '<pre>'; print_r($row);
+ //echo '<pre>'; print_r($row);
+ //echo $row['gender'];
   ?>
     <div class="formdiv">
         <form name="myForm" id="updateform" action="userdb.php" method="post">
             <h3>Update Details</h3>
+            <input type="hidden" value='<?php echo $row['id']?>' name='id'>
             <label for="fname">First Name:</label>
             <input type="text" id="fname" name="fname" value='<?php echo $row['fname'];?>'>
             <div><p id="fmessage"></p></div>
         
             <label for="lname">Last Name:</label>
-            <input type="text" id="lname" name="lname">
+            <input type="text" id="lname" name="lname" value='<?php echo $row['lname'];?>'>
             <div><p id="lmessage"></p></div>
-        
+
             <label style="display: inline; margin-top:5px;">Gender:</label>
-            <input type="radio" id="male" name="gender" value="male" checked>
+            <input type="radio" id="male" name="gender" value="male" <?php echo ($row['gender']=='male')?'checked':''?> >
             <label for="male" style="display: inline;">Male</label>
         
-            <input type="radio" id="female" name="gender" value="female">
+            <input type="radio" id="female" name="gender" value="female" <?php echo ($row['gender']=='female')?'checked':''?>>
             <label for="female" style="display: inline;">Female</label>
         
-            <input type="radio" id="other" name="gender" value="other">
+            <input type="radio" id="other" name="gender" value="other" <?php echo ($row['gender']=='other')?'checked':''?>>
             <label for="other" style="display: inline;">Other</label>
             <div><p id="rmessage"></p></div>
         
         
             <label for="dob" style="padding-top: 10px;">Date of Birth:</label>
-            <input type="date" id="dob" name="dob" required>
+            <input type="date" id="dob" name="dob" required value='<?php echo $row['dob'];?>'>
             <div><p id="dmessage"></p></div>
         
             <label for="mobile">Mobile Number:</label>
-                <input type="text" name="mobile" id="mobile">
+                <input type="text" name="mobile" id="mobile" value='<?php echo $row['mobile'];?>'>
             <div><p id="mmessage"></p></div>
         
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" >
+            <input type="email" id="email" name="email" value='<?php echo $row['email'];?>'>
             <div><p id="emessage"></p></div>
             
             <button type="submit" name="updateuser" id="updateuser">Update</button>

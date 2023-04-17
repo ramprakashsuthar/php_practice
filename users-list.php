@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
   <?php 
@@ -52,8 +53,9 @@
           <td><?php echo $row['created_date']?></td>
           <td><?php echo $row['updated_date']?></td>
           <td>
-            <a href="edit-users.php?id=<?php echo $row['id'];?>">Update</a>
-            <button>Delete</button>
+            <a href="edit-users.php?id=<?php echo $row['id'];?>">Update</a>&nbsp;
+            <!-- <a href="userdb.php?id=<?php echo $row['id'];?>&action=delete">Delete</a> -->
+            <a href="javascript(0)" onclick="deleteUser(<?php echo $row['id'];?>)">Delete</a>
           </td>
         </tr>
       <?php
@@ -63,4 +65,19 @@
     </tbody>
   </table>
 </body>
+<script>
+  function deleteUser(userid){
+    event.preventDefault();
+    //alert(userid)
+    $.ajax({
+      url: "userdb.php?id="+userid+"&action=delete",
+      type: 'GET',
+      success:function(returndata){
+        alert(returndata);
+        location.reload();
+      }
+    });
+  }
+
+</script>
 </html>
